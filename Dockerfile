@@ -3,7 +3,7 @@ FROM dockerfile/ubuntu
 RUN \
   apt-get update && \
   apt-get install -y python python-dev python-pip python-virtualenv && \
-  rm -rf /var/lib/apt/lists/*
+  rm -rf /var/lib/apt/lists/* && \
   cd /tmp && \
   wget http://nodejs.org/dist/v0.11.14/node-v0.11.16.tar.gz && \
   tar xvzf node-v0.11.14.tar.gz && \
