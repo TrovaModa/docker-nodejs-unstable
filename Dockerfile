@@ -1,10 +1,13 @@
-FROM dockerfile/python
+FROM dockerfile/ubuntu
 
 RUN \
+  apt-get update && \
+  apt-get install -y python python-dev python-pip python-virtualenv && \
+  rm -rf /var/lib/apt/lists/*
   cd /tmp && \
-  wget http://nodejs.org/dist/v0.11.16/node-v0.11.16.tar.gz && \
-  tar xvzf node-v0.11.16.tar.gz && \
-  rm -f node-v0.11.16.tar.gz && \
+  wget http://nodejs.org/dist/v0.11.14/node-v0.11.16.tar.gz && \
+  tar xvzf node-v0.11.14.tar.gz && \
+  rm -f node-v0.11.14.tar.gz && \
   cd node-v* && \
   ./configure && \
   CXX="g++ -Wno-unused-local-typedefs" make && \
@@ -12,4 +15,4 @@ RUN \
   cd /tmp && \
   rm -rf /tmp/node-v* && \
   npm install -g npm && \
-  echo -e '\n# Node.js\nexport PATH="node_modules/.bin:$PATH"' >> /root/.bashrc
+  echo '\n# Node.js\nexport PATH="node_modules/.bin:$PATH"' >> /root/.bashrc
